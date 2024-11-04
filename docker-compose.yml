@@ -37,6 +37,8 @@ services:
         container_name: ragbot-qa
         restart: unless-stopped
         command: python main.py
+        ports:
+            - 8080:8080
         env_file:
             - .env
         depends_on:

@@ -3,6 +3,7 @@ from typing import Iterable
 from bs4 import BeautifulSoup
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+import pandas as pd
 from pgvector.sqlalchemy import Vector
 import requests
 from sqlalchemy import Engine, Text, Column, DateTime, func, select
@@ -53,16 +54,18 @@ def add_chunks(engine: Engine):
     """
 
     logging.warning("START CREATE INDEX")
-    response = requests.get(Config.TEXT_SOURCE_URL)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.text, "html.parser")
-        parsed_text = soup.get_text()
-    else:
-        logging.error(
-            f"Parsing text from {Config.TEXT_SOURCE_URL} was not successful: HTTP STATUS CODE {response.status_code}"
-        )
-        raise
-    documents = [Document(page_content=parsed_text)]
+    # response = requests.get(Config.TEXT_SOURCE_URL)
+    # if response.status_code == 200:
+    #     soup = BeautifulSoup(response.text, "html.parser")
+    #     parsed_text = soup.get_text()
+    # else:
+    #     logging.error(
+    #         f"Parsing text from {Config.TEXT_SOURCE_URL} was not successful: HTTP STATUS CODE {response.status_code}"
+    #     )
+    #     raise
+    documents = pd.read_csv("vopro_chunks.csv").text
+    documents = [Document(page_content=parsed_text) for parsed_text in documents]
+    logging.warning(len(documents))
     all_splits = text_splitter.split_documents(documents)
     with Session(engine) as session:
         session.query(Chunk).delete()

@@ -26,8 +26,15 @@ async def qa(request: web.Request) -> web.Response:
     Returns:
         web.Response: ответ
     """
-
-    question = (await request.json())["question"]
+    try:
+        question = (await request.json())["question"]
+    except Exception as e:
+        return web.Response(
+            text=f"Bad Request: There is no question in request! More details: {e}",
+            status=400,
+        )
+    if len(question) < 3:
+        return web.Response(text="Bad Request: Question is too short!", status=400)
     chunks = get_chunks(engine=engine, question=question)
     answer = get_answer("\n=====\n".join(chunks), question)
     if "ответ не найден" in answer.lower():

@@ -40,7 +40,7 @@ docker compose up --build -d
 
 ### Описание файла Docker compose
 
-[Docker-compose.yaml](./docker-compose.yaml) состоит из следующих **сервисов:**
+[Docker-compose.yaml](./docker-compose.yml) состоит из следующих **сервисов:**
 - **db:**
   - Отвечает за базу данных PostgreSQL с расширением PGVector.
   - Использует образ `ragbot/db:latest`, построенный из директории `./db`.

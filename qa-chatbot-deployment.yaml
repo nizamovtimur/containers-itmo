@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ragbot-qa-chatbot
+  labels:
+    app: ragbot
+    component: qa-chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ragbot
+      component: qa-chatbot
+  template:
+    metadata:
+      labels:
+        app: ragbot
+        component: qa-chatbot
+    spec:
+      initContainers:
+        - name: db-migrate
+          image: ragbot/db-migrate:latest
+          imagePullPolicy: Never
+          envFrom:
+            - configMapRef:
+                name: ragbot-config
+            - secretRef:
+                name: ragbot-secret
+          command: ["alembic", "upgrade", "head"]
+      containers:
+        - name: ragbot-qa
+          image: ragbot/qa:latest
+          imagePullPolicy: Never
+          command: [ "python", "main.py" ]
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: ragbot-config
+            - secretRef:
+                name: ragbot-secret
+        - name: ragbot-chatbot
+          image: ragbot/chatbot:latest
+          imagePullPolicy: Never
+          command: [ "python", "main.py" ]
+          envFrom:
+            - configMapRef:
+                name: ragbot-config
+            - secretRef:
+                name: ragbot-secret

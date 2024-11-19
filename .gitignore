@@ -2,6 +2,8 @@
 [.][v]env
 .env*
 !.env.example
+secret*
+!secret-example.yaml
 saved_models
 faiss_index
 __pycache__

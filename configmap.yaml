@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ragbot-config
+  labels:
+    app: ragbot
+data:
+  POSTGRES_DB: ragbot_db
+  POSTGRES_HOST: ragbot-db
+  POSTGRES_PORT: "5432"
+  POSTGRES_USER: postgres
+  QA_HOST: "ragbot-qa:8080"
+  TEXT_SOURCE_URL: "https://lib.ru/POEEAST/ARISTOTEL/metaphiz.txt"

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ragbot-db
+  labels:
+    app: ragbot
+    component: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ragbot
+      component: db
+  template:
+    metadata:
+      labels:
+        app: ragbot
+        component: db
+    spec:
+      containers:
+        - name: ragbot-db
+          image: ragbot/db:latest
+          imagePullPolicy: Never
+          envFrom:
+            - configMapRef:
+                name: ragbot-config
+            - secretRef:
+                name: ragbot-secret
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: db-data
+              mountPath: /var/lib/postgresql/data
+          livenessProbe:
+            exec:
+              command:
+                - pg_isready
+                - -U
+                - $(POSTGRES_USER)
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+            successThreshold: 1
+      volumes:
+        - name: db-data
+          persistentVolumeClaim:
+            claimName: db-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-pvc
+  labels:
+    app: ragbot
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

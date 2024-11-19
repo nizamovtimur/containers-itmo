@@ -134,15 +134,17 @@ TODO:
 
 [[notion](https://jasper-cause-ce0.notion.site/4-More-Kubernetes-e2690d6f8ae3419790b1e0f16f59142d)]
 
-По аналогии с лабой 2 созданы следующие манифесты:
+По аналогии с лабой 2 составлены следующие манифесты:
  * [configmap.yaml](configmap.yaml) — конфигурации для компонентов
  * [secret.yaml](secret-example.yaml) — секреты (пример см. secret-example.yaml)
  * [db-deployment.yaml](db-deployment.yaml) — деплоймент БД
  * [qa-chatbot-deployment.yaml](qa-chatbot-deployment.yaml) — деплоймент вопрос-ответного модуля и чат-бота
+ * [db-service.yaml](db-service.yaml) — сервис БД
  * [qa-service.yaml](qa-service.yaml) — сервис вопрос-ответного модуля
 
 Сборка образов:
 ```shell
+& minikube -p minikube docker-env --shell powershell | Invoke-Expression
 docker compose build
 ```
 
@@ -152,15 +154,20 @@ kubectl apply -f configmap.yaml
 kubectl apply -f secret.yaml
 kubectl apply -f db-deployment.yaml
 kubectl apply -f qa-chatbot-deployment.yaml
+kubectl apply -f db-service.yaml
 kubectl apply -f qa-service.yaml
 ```
 
-Статус работы приложения:
+Статус работы приложения (`kubectl get pods` и `kubectl logs`):
 
-(`kubectl get pods` и `kubectl logs`)
+![kubectl get pods](assets\lab4-kubectl-logs.png)
 
-Пример обращения к API QA:
+Скриншот `minikube dashboard --url`:
 
-(скрин `minikube service qa-service`)
+![minikube dashboard](assets\lab4-k8s-dashboard.png)
 
-(скрин долбёжки в API из python в PS)
+Пример обращения к API QA (`minikube service ragbot-qa`):
+
+![minikube service ragbot-qa](assets\lab4-ragbot-qa-service.png)
+
+![QA api example](assets\lab4-qa-api-example.png)

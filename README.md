@@ -98,6 +98,8 @@ docker compose up --build -d
 - **ragbot-conn:**
   - Сеть, используемая для связи между сервисами.
 
+*Пример файла `.env` представлен в [.env.example](.env.example).*
+
 ### Ответы на вопросы
 
 > Можно ли ограничивать ресурсы (например, память или CPU) для сервисов в docker-compose.yml? Если нет, то почему, если да, то как?
@@ -116,10 +118,10 @@ docker compose up --build -d
 
 > Как можно запустить только определенный сервис из docker-compose.yml, не запуская остальные?
 
-С помощью команды `exec`, например:
+С помощью команды `run`, например:
 
 ```shell
-docker-compose exec db
+docker compose run db
 ```
 
 ## Лабораторная работа 3
@@ -160,14 +162,14 @@ kubectl apply -f qa-service.yaml
 
 Статус работы приложения (`kubectl get pods` и `kubectl logs`):
 
-![kubectl get pods](assets\lab4-kubectl-logs.png)
+![kubectl get pods](assets/lab4-kubectl-logs.png)
 
 Скриншот `minikube dashboard --url`:
 
-![minikube dashboard](assets\lab4-k8s-dashboard.png)
+![minikube dashboard](assets/lab4-k8s-dashboard.png)
 
 Пример обращения к API QA (`minikube service ragbot-qa`):
 
-![minikube service ragbot-qa](assets\lab4-ragbot-qa-service.png)
+![minikube service ragbot-qa](assets/lab4-ragbot-qa-service.png)
 
-![QA api example](assets\lab4-qa-api-example.png)
+![QA api example](assets/lab4-qa-api-example.png)

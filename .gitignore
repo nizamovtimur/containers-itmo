@@ -1,0 +1,14 @@
+.idea
+[.][v]env
+qa/.env.example
+!qa/.env.example
+saved_models
+faiss_index
+__pycache__
+cache
+.pytest_cache
+node_modules
+database*.csv
+/.ropeproject/
+/qa/.env
+/logs/qa.log

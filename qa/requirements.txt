@@ -1,0 +1,7 @@
+aiohttp==3.11.7
+beautifulsoup4==4.12.3
+langchain==0.2.1
+python-dotenv==1.0.1
+yandex-chain==0.0.10
+scikit-learn==1.5.2
+sentence-transformers==3.3.1

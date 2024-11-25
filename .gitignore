@@ -1,0 +1,13 @@
+.idea
+[.][v]env
+.env*
+!.env.example
+secret*
+!secret-example.yaml
+saved_models
+faiss_index
+__pycache__
+cache
+.pytest_cache
+node_modules
+database*.csv

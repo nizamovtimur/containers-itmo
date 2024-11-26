@@ -1,8 +1,8 @@
 # Лабораторные работы по курсу ИТМО "Контейнеризация и оркестрация приложений"
 
-[[notion](https://jasper-cause-ce0.notion.site/3b2e4b7180954cbbad6c0449db638d6b)]
+**Авторы:** Неронов Роман, Низамов Тимур — AI Talent Hub
 
-Выполнили: Неронов Роман, Низамов Тимур — AI Talent Hub
+[[notion](https://jasper-cause-ce0.notion.site/3b2e4b7180954cbbad6c0449db638d6b)]
 
 ## Лабораторные работы
  - [Лабораторная работа 1](https://github.com/nizamovtimur/containers-itmo/tree/lab1)

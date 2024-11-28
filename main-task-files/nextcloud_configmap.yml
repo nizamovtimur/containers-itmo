@@ -10,3 +10,4 @@ data:
   POSTGRES_HOST: "postgres-service"
   NEXTCLOUD_TRUSTED_DOMAINS: "127.0.0.1"
   NEXTCLOUD_ADMIN_USER: "any_name_you_want"
+  NEXTCLOUD_ADMIN_PASSWORD: "literally_any_password"
